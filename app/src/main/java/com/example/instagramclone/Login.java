@@ -1,0 +1,82 @@
+package com.example.instagramclone;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.shashank.sony.fancytoastlib.FancyToast;
+
+public class Login extends AppCompatActivity implements View.OnClickListener {
+    private EditText edtEmail, edtPassword;
+    private Button btnLogin, btnSignup;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        edtEmail = findViewById(R.id.edtuseremail);
+        edtPassword = findViewById(R.id.edtuserpassword);
+        btnLogin = findViewById(R.id.btnlogin);
+        btnSignup = findViewById(R.id.btnsignup);
+
+        btnLogin.setOnClickListener(this);
+        btnSignup.setOnClickListener(this);
+
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btnlogin:
+                //check user input is empty or not
+                if (edtEmail.getText().toString().equals("") ||
+                        edtPassword.getText().toString().equals("")){
+
+                    FancyToast.makeText(Login.this,"Email and Password is Required",
+                            FancyToast.LENGTH_SHORT,FancyToast.INFO,false).show();
+                } else {
+                    ParseUser.logInInBackground(edtEmail.getText().toString(), edtPassword.getText().toString(),
+                            new LogInCallback() {
+                                @Override
+                                public void done(ParseUser user, ParseException e) {
+                                    if (user != null && e == null){
+                                        FancyToast.makeText(Login.this,"Login successful",
+                                                FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+                                    }
+                                    else {
+                                        FancyToast.makeText(Login.this,"Login Failed",
+                                                FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                                    }
+                                }
+                            });
+                }
+
+                break;
+            case R.id.btnsignup:
+                startActivity( new Intent(Login.this,SignUp.class));
+                break;
+        }
+
+    }
+
+    public void rootLayoutLoginTapped(View view){
+        try {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+}
