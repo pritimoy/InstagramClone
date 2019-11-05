@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -28,6 +29,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         btnLogin = findViewById(R.id.btnlogin);
         btnSignup = findViewById(R.id.btnsignup);
 
+        //implement the enter key or return key on keyboard
+        edtPassword.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent Event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER && Event.getAction() ==KeyEvent.ACTION_DOWN){
+                    onClick(btnLogin);
+                }
+                return false;
+            }
+        });
+
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
 
@@ -51,7 +63,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                 @Override
                                 public void done(ParseUser user, ParseException e) {
                                     if (user != null && e == null){
-                                        FancyToast.makeText(Login.this,"Login successful",
+                                        startActivity(new Intent(Login.this, MainActivity.class));
+                                        FancyToast.makeText(Login.this,"Login successful"+user.getUsername(),
                                                 FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                                     }
                                     else {

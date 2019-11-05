@@ -88,6 +88,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                                 FancyToast.makeText(SignUp.this, appUser.getUsername()
                                                 + "is successfully sign up", Toast.LENGTH_SHORT,
                                         FancyToast.SUCCESS, false).show();
+                                startActivity(new Intent(SignUp.this,MainActivity.class));
+
                                 //progressDialog.dismiss();
                             } else {
                                 FancyToast.makeText(SignUp.this, "There was a error "
