@@ -7,10 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <include
             android:id="@+id/myToolbar"
             layout="@layout/my_toolbar"/>
@@ -32,13 +35,5 @@
         android:layout_below="@+id/appBarLayout"/>
 
 
-    <Button
-        android:id="@+id/userLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
 
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="650dp"
-         />
 </RelativeLayout>

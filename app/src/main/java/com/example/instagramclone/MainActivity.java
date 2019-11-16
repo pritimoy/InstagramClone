@@ -23,11 +23,21 @@ public class MainActivity extends AppCompatActivity {
     private TabAdapter tabAdapter;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        ParseUser parseUser = new ParseUser();
+        if (ParseUser.getCurrentUser() == null){
+            startActivity(new Intent(MainActivity.this, Login.class));
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnLogout = findViewById(R.id.userLogout);
+//        btnLogout = findViewById(R.id.userLogout);
 
         setTitle("Social Media App!");
         toolbar = findViewById(R.id.myToolbar);
@@ -51,18 +61,18 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Log.i("user","user"+userName);
-        if (  ParseUser.getCurrentUser() == null){
-            startActivity( new Intent(MainActivity.this,SignUp.class));
-        }
-        else {
-            btnLogout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ParseUser.getCurrentUser().logOut();
-                    startActivity(new Intent(MainActivity.this, Login.class));
-                }
-            });
-        }
+//        if (  ParseUser.getCurrentUser() == null){
+//            startActivity( new Intent(MainActivity.this,SignUp.class));
+//        }
+//        else {
+//            btnLogout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    ParseUser.getCurrentUser().logOut();
+//                    startActivity(new Intent(MainActivity.this, Login.class));
+//                }
+//            });
+//        }
 
 
 
