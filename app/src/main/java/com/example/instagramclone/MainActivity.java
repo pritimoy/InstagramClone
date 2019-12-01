@@ -1,16 +1,13 @@
 package com.example.instagramclone;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-
 import com.google.android.material.tabs.TabLayout;
-import com.parse.Parse;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
@@ -27,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         ParseUser parseUser = new ParseUser();
-        if (ParseUser.getCurrentUser() == null){
+        if (parseUser.getCurrentUser() == null){
             startActivity(new Intent(MainActivity.this, Login.class));
         }
     }
@@ -61,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Log.i("user","user"+userName);
-//        if (  ParseUser.getCurrentUser() == null){
-//            startActivity( new Intent(MainActivity.this,SignUp.class));
-//        }
+        if (  ParseUser.getCurrentUser() == null){
+            startActivity( new Intent(MainActivity.this,SignUp.class));
+        }
 //        else {
 //            btnLogout.setOnClickListener(new View.OnClickListener() {
 //                @Override
